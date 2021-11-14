@@ -3,7 +3,7 @@ use std::io::{self, BufRead};
 use structopt::StructOpt;
 
 fn read_stdin() -> Vec<String> {
-    let mut result = Vec::new();
+    let mut result = vec![];
     let stdin = io::stdin();
     for line in stdin.lock().lines() {
         result.push(line.expect("unable to read input line"));
@@ -48,12 +48,10 @@ mod test {
 
 // returns true iff candidate_path is contained under reference_path (or both are equal)
 fn is_contained_in(candidate_path: &str, reference_path: &str) -> bool {
-    if candidate_path == reference_path {
-        return true;
-    }
-    candidate_path.len() > reference_path.len()
-        && candidate_path.chars().nth(reference_path.len()).expect("illegal reference") == '/'
-        && reference_path == &candidate_path[..reference_path.len()]
+    candidate_path == reference_path ||
+        (candidate_path.len() > reference_path.len()
+            && candidate_path.chars().nth(reference_path.len()).expect("illegal reference") == '/'
+            && reference_path == &candidate_path[..reference_path.len()])
 }
 
 fn is_line_redundant(line_idx: usize, lines: &Vec<String>) -> bool {

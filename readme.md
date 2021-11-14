@@ -6,11 +6,24 @@ input
 ---
 lines each containing a single valid unix path name (or file name)
 
+Example input:
+```
+/home/foo/important-documents
+/home/foo/.ssh
+/home/foo/.gnupg
+/home/foo
+```
+
 output
 ---
 merged set of distinct path names, where:
 - child folders are dropped, where this folder is contained in another parent folder
 - duplicates are removed
+
+Example output:
+```
+/home/foo
+```
 
 original purpose
 ---
