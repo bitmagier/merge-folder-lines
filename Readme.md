@@ -1,8 +1,8 @@
 # merge-folder-names
 
-CLI tool to merge folder names.
+CLI tool for merging folder names
 
-Creates a merged, distinct list of unix file/folder names from any list of file/folder names.
+Creates a merged, distinct list of unix file/folder names from a potentially redundant list of file/folder names.
 Overlapping locations and duplicates are merged, so that a distinct set remains, that covers all input locations.
 
 ## Input
