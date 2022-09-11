@@ -11,42 +11,7 @@ fn read_stdin() -> Vec<String> {
     return result;
 }
 
-#[cfg(test)]
-mod test {
-    use super::*;
-
-    #[test]
-    fn test_is_contained_in() {
-        assert_eq!(false, is_contained_in("/root", "/opt"));
-        assert_eq!(false, is_contained_in("/root", "/root/bla"));
-        assert!(is_contained_in("/root/bla", "/root"));
-        assert!(is_contained_in("/root", "/root"));
-    }
-
-    #[test]
-    fn test_is_line_redundant() {
-        let lines = vec![
-            "/data".to_string(),
-            "/data/media".to_string(),
-            "/data/foo".to_string(),
-            "/data/media/music".to_string(),
-            "/data/media2".to_string(),
-        ];
-        assert_eq!(false, is_line_redundant(0, &lines));
-        assert!(is_line_redundant(1, &lines));
-        assert!(is_line_redundant(2, &lines));
-        assert!(is_line_redundant(3, &lines));
-        assert!(is_line_redundant(4, &lines));
-
-        let lines = &lines[1..].to_vec();
-        assert_eq!(false, is_line_redundant(0, lines));
-        assert_eq!(false, is_line_redundant(1, lines));
-        assert!(is_line_redundant(2, lines));
-        assert_eq!(false, is_line_redundant(3, lines));
-    }
-}
-
-// returns true iff candidate_path is contained under reference_path (or both are equal)
+// returns true if candidate_path is contained under reference_path (or both are equal)
 fn is_contained_in(candidate_path: &str, reference_path: &str) -> bool {
     candidate_path == reference_path ||
         (candidate_path.len() > reference_path.len()
@@ -97,3 +62,39 @@ fn main() {
     }
 }
 
+
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_is_contained_in() {
+        assert_eq!(false, is_contained_in("/root", "/opt"));
+        assert_eq!(false, is_contained_in("/root", "/root/bla"));
+        assert!(is_contained_in("/root/bla", "/root"));
+        assert!(is_contained_in("/root", "/root"));
+    }
+
+    #[test]
+    fn test_is_line_redundant() {
+        let lines = vec![
+            "/data".to_string(),
+            "/data/media".to_string(),
+            "/data/foo".to_string(),
+            "/data/media/music".to_string(),
+            "/data/media2".to_string(),
+        ];
+        assert_eq!(false, is_line_redundant(0, &lines));
+        assert!(is_line_redundant(1, &lines));
+        assert!(is_line_redundant(2, &lines));
+        assert!(is_line_redundant(3, &lines));
+        assert!(is_line_redundant(4, &lines));
+
+        let lines = &lines[1..].to_vec();
+        assert_eq!(false, is_line_redundant(0, lines));
+        assert_eq!(false, is_line_redundant(1, lines));
+        assert!(is_line_redundant(2, lines));
+        assert_eq!(false, is_line_redundant(3, lines));
+    }
+}
